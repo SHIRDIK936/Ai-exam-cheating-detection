@@ -58,7 +58,15 @@ if not os.path.exists("evidence"):
 log_file = "logs.csv"
 
 # ---------------- CAMERA ----------------
-cap = cv2.VideoCapture(0)
+uploaded_file = st.file_uploader("Upload Video", type=["mp4"])
+
+if uploaded_file:
+    with open("temp.mp4", "wb") as f:
+        f.write(uploaded_file.read())
+
+    cap = cv2.VideoCapture("temp.mp4")
+else:
+    st.stop()
 
 # ---------------- FACE REGISTRATION ----------------
 if "captured_image" not in st.session_state:
