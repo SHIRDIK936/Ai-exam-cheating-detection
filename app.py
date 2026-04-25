@@ -58,14 +58,15 @@ if not os.path.exists("evidence"):
 log_file = "logs.csv"
 
 # ---------------- CAMERA ----------------
-uploaded_file = st.file_uploader("Upload Video", type=["mp4"])
+uploaded_file = st.file_uploader("📂 Upload Exam Video", type=["mp4", "mov", "avi"])
 
-if uploaded_file:
+if uploaded_file is not None:
     with open("temp.mp4", "wb") as f:
         f.write(uploaded_file.read())
 
     cap = cv2.VideoCapture("temp.mp4")
 else:
+    st.warning("Please upload a video to start monitoring")
     st.stop()
 
 # ---------------- FACE REGISTRATION ----------------
